@@ -15,7 +15,14 @@ public class GreetingResourceTest {
           .when().get("/hello")
           .then()
              .statusCode(200)
-             .body(is("Hello RESTEasy"));
+             .body(is("Aloha Quarkus"));
     }
 
+    @Test
+    public void testWelcome() {
+        given()
+        .when().get("/hello/welcome/Lily")
+        .then()
+        .body(is("Welcome to the Ethernal Questions Lily"));
+    }
 }
