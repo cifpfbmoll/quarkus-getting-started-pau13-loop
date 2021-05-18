@@ -85,6 +85,7 @@
     </plugins>
   </build>
   <profiles>
+    <!-- Find native profile -->
     <profile>
       <id>native</id>
       <activation>
