@@ -25,4 +25,12 @@ public class GreetingResourceTest {
         .then()
         .body(is("Welcome to the Ethernal Questions Lily"));
     }
+
+    @Test
+    public void testQuestion() {
+        given()
+        .when().get("/hello/question")
+        .then()
+        .body(is("We accept the love we think we deserve ?"));
+    }
 }
