@@ -23,6 +23,7 @@ public class GreetingResourceTest {
         given()
         .when().get("/hello/welcome/Lily")
         .then()
+        .statusCode(200)
         .body(is("Welcome to the Ethernal Questions Lily"));
     }
 
@@ -31,6 +32,7 @@ public class GreetingResourceTest {
         given()
         .when().get("/hello/question")
         .then()
+        .statusCode(200)
         .body(is("We accept the love we think we deserve ?"));
     }
 }
