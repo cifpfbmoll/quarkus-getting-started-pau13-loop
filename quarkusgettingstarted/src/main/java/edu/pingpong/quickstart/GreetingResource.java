@@ -3,18 +3,19 @@ package edu.pingpong.quickstart;
 import java.time.LocalDate;
 
 import javax.inject.Inject;
+import javax.validation.Valid;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 // Carrefull with the path param you import don't get the wrong one --> javas.ws.rs.PathParam
 import org.jboss.resteasy.annotations.jaxrs.PathParam;
 
 import edu.pingpong.quickstart.domain.Erudite;
-import edu.pingpong.quickstart.domain.Questions;
 import edu.pingpong.quickstart.service.GreetingService;
 import edu.pingpong.quickstart.service.QuestionService;
 
@@ -57,12 +58,15 @@ public class GreetingResource {
         return new Erudite("Einstein", "Try not to become a man of success, but rather try to become a man of value", LocalDate.of(1879, 05, 14));
     }
 
-    // @POST
-    // @Consumes(MediaType.APPLICATION_JSON)
-    // @Path("/erudite")
-    // public Erudite createErudite() {
-    //     return new Erudite();
-    // }
+    // Validation not working like desired
+    // curl -H "Content-Type:application/json" -X POST http://localhost:8080/hello/erudite -v -d "{\"name\":\"Einsten\", \"quote\":\"Try not to\", \"bornDate\":\"1879-05-14\"}" 
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Path("/erudite")
+    public Response createErudite(@Valid Erudite erudite) {
+        // We should or we shouldn't add erudite into ok() to be able to test the post method ? 
+        return Response.ok(erudite).build();
+    }
 
     // curl -v -w "\n" http://localhost:8080/hello
     @GET
